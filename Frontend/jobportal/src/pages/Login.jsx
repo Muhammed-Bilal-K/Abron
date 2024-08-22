@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { login } from "../api/admin";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,6 +20,7 @@ const Login = () => {
       const response = await login(payload);
       console.log(response);
       localStorage.setItem("AdminToken", response.token);
+      navigate('/dashboard');
     } catch (error) {
       console.error("Error:", error);
     }

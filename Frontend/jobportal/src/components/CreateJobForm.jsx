@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { jobCreate } from "../api/admin";
+import { useNavigate } from "react-router-dom";
 
 const JobForm = () => {
   const [title, setTitle] = useState("");
@@ -7,6 +8,7 @@ const JobForm = () => {
   const [requirements, setRequirements] = useState("");
   const [location, setLocation] = useState("");
   const [salary, setSalary] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,6 +23,7 @@ const JobForm = () => {
 
     try {
       const response = await jobCreate(payload);
+      navigate('/');
       console.log(response);
       
     } catch (error) {

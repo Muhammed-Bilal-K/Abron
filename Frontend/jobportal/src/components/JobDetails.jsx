@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getJobById, applyToJob } from "../api/admin";
 
 const JobDetail = () => {
@@ -13,12 +13,14 @@ const JobDetail = () => {
   const [coverLetter, setCoverLetter] = useState("");
   const [skills, setSkills] = useState("");
   const [experience, setExperience] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchJob = async () => {
       try {
         const response = await getJobById(jobId);
         setJob(response);
+        navigate('/');
       } catch (error) {
         console.error("Error:", error);
       }
